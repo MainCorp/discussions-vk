@@ -25,7 +25,7 @@
 
 	var linkToGroup = 'https://vk.com/';
 	var adminName = 'Администратор';
-	var adminIcon = 'http://manschool.getcourse.ru/pl/fileservice/user/file/download?h=25679d8dbf35a3cd2baebac5bf5383d4.png';
+	var adminIcon = '';
 	var startComment = 19;
 
 	var apiLink;
