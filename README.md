@@ -8,7 +8,7 @@
 
       template.html       шаблон
       style.css           стили
-      script.js           логика
+      script.js           функционал
 
 > 1. На сайте должен быть подключён JQuery
 > 2. Добавить содержимое template перед закрытым тегом body
