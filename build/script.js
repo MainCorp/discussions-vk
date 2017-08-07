@@ -16,7 +16,7 @@
 	 */
 
 	var template = document.querySelector('#comment-template');
-	var container = $('.vk-comments .builder');
+	var container = $('.discussions-vk');
 
 	var group_id = 125264591;
 	var topic_id = 34277245;
@@ -26,7 +26,7 @@
 	var linkToGroup = 'https://vk.com/';
 	var adminName = 'Администратор';
 	var adminIcon = '';
-	var startComment = 19;
+	var startComment = 1;
 
 	var apiLink;
 
