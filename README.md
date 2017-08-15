@@ -18,11 +18,11 @@
 
 Файловая структура fast - build:
 
-	  index.html       			страница скрипта
+	  index.html                страница скрипта
       js/jquery-3.2.1.min.js    jquery
-      js/script.js           	функционал
+      js/script.js              функционал
 	  css/normalize.css         сброс стилей
-	  css/style.css          	стили
+	  css/style.css             стили
 
 > 1. Залить проект в корень вашего хостинга
 > 2. Поменять данные в js/script.js
