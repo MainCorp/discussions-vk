@@ -1,8 +1,4 @@
-.vk-comments .col-md-offset-2 {
-    margin-left: 0 !important;
-}
-
-.vk-comments .builder {
+.discussions-vk {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     display: flex;

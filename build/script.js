@@ -18,8 +18,8 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = 125264591;
-	var topic_id = 34277245;
+	var group_id = '';
+	var topic_id = '';
 	var count = 100;
 	var extended = 1;
 
@@ -57,6 +57,8 @@
 
 			for (key in data) {
 				if (typeof data[key] === 'object') {
+					getLink = '';
+
 					switch(data.attachments[0].type) {
 						case 'photo':
 							comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
@@ -128,13 +130,7 @@
 			var getText = data.text;
 			var getLink;
 			
-			if (validationComment(comment, data, getText, getLink)[0][1] === 'Оригинал здесь: https://vk.com/wall-125264591_744') {
-				comment.querySelector('.comment__text-title').textContent = validationComment(comment, data, getText, getLink)[0][0];
-				comment.querySelector('.comment__original-link').textContent = validationComment(comment, data, getText, getLink)[0][1];
-				comment.querySelector('.comment__original-link').href = validationComment(comment, data, getText, getLink)[1];
-			} else {
-				comment.querySelector('.comment__text-title').textContent = validationComment(comment, data, getText, getLink)[0];
-			}
+			comment.querySelector('.comment__text-title').textContent = validationComment(comment, data, getText, getLink)[0];
 
 			addAuthor(i, comments, profiles, comment);
 
@@ -158,5 +154,6 @@
 
 	apiLink = 'https://api.vk.com/method/board.getComments?group_id=' + group_id + '&topic_id=' + topic_id + '&count=' + count + '&extended=' + extended;
 
+	console.log(apiLink);
 	showDiscussion(apiLink, template, container, startComment);
 })();
