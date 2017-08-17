@@ -18,8 +18,8 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = '110167366';
-	var topic_id = '33759272';
+	var group_id = '';
+	var topic_id = '';
 	var count = 100;
 	var extended = 1;
 
