@@ -57,12 +57,6 @@
 
 			for (key in data) {
 				if (typeof data[key] === 'object') {
-					if (getText.length > 0) {
-						getLink = getText[1].split('Оригинал здесь:')[1];
-					} else {
-						getLink = '';
-					}
-
 					switch(data.attachments[0].type) {
 						case 'photo':
 							comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
