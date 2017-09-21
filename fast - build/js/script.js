@@ -18,11 +18,11 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = ''; // id группы
-	var topic_id = ''; // id обсуждения
+	var group_id = '50658538'; // id группы
+	var topic_id = '33164486'; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
-	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
+	var need_likes = 0; // загружаем лайки (0 - не загружать, 1 - загрузить)
 	var sort = 0; // фильтруем вывод комментариев (0 - с начала, 1 - с конца)
 	var startComment = 1; // С какого комментария выводим
 	var application = 1; // Добавляем стикеры/фото в список отзывов (0 - не добавлять, 1 - добавлять)
@@ -125,8 +125,11 @@
 
 	    				comment.querySelector('.comment__logo-image').src = profiles[j].photo_medium_rec;
 	    				comment.querySelector('.comment__group-title').textContent = profiles[j].first_name + ' ' + profiles[j].last_name;
-							comment.querySelector('.comment__like-number').textContent = data.likes.count;
 							comment.querySelector('.comment__comment-date').textContent = commentDate;
+
+							if (data.likes !== undefined) {
+								comment.querySelector('.comment__like-number').textContent = data.likes.count;
+							}
 
 	    				if (profiles[j].online === 1) {
 	    					comment.querySelector('.comment__online').textContent = 'online';
