@@ -1,6 +1,6 @@
 (function() {
 	/**
-	 * Отображает список сообщений из обсуждения в vk.com 
+	 * Отображает список сообщений из обсуждения в vk.com
 	 * @variable {Object} template шаблон для обсуждений
 	 * @variable {Object} container контейнер, где будут обсуждения
 	 *
@@ -18,17 +18,39 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = '';
-	var topic_id = '';
+	var group_id = '62330024'; // id группы
+	var topic_id = '32715594'; // id обсуждения
 	var count = 100;
-	var extended = 1;
+	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
+	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
+	var sort = 0; // фильтруем вывод комментариев (0 - с начала, 1 - с конца)
+	var startComment = 1; // С какого комментария выводим
 
-	var linkToGroup = 'https://vk.com/';
-	var adminName = 'Администратор';
-	var adminIcon = '';
-	var startComment = 1;
+	var linkToGroup = 'https://vk.com/'; // ссылка на вас или вашу группу
+	var adminName = 'Администратор'; // Ваше имя иои название вашей группы
+	var adminIcon = 'https://vk.com/images/camera_100.png'; // URL иконки вашего vk или группы, размер 100x100
 
 	var apiLink;
+
+	var months = [
+		 'янв',
+		 'фев',
+		 'марта',
+		 'апр',
+		 'мая',
+		 'июня',
+		 'июля',
+		 'августа',
+		 'сентября',
+		 'ноября',
+		 'дек',
+	];
+
+	if (sort === 0 || sort === '0') {
+		sort = 'asc';
+	} else {
+		sort = 'desc';
+	}
 
 	function showDiscussion(req, templateElement, commentsContainer, idStartComment) {
 		var elementToClone;
@@ -59,16 +81,18 @@
 				if (typeof data[key] === 'object') {
 					getLink = '';
 
-					switch(data.attachments[0].type) {
-						case 'photo':
-							comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
-							break;
-						case 'video':
-							comment.querySelector('.comment__image').src = data.attachments[0].video.image_big;
-							break;
-						case 'sticker':
-							comment.querySelector('.comment__image').src = data.attachments[0].sticker.photo_128;
+					if (data.attachments !== undefined) {
+						switch(data.attachments[0].type) {
+							case 'photo':
+								comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
 								break;
+							case 'video':
+								comment.querySelector('.comment__image').src = data.attachments[0].video.image_big;
+								break;
+							case 'sticker':
+								comment.querySelector('.comment__image').src = data.attachments[0].sticker.photo_128;
+									break;
+						}
 					}
 				}
 			}
@@ -86,15 +110,20 @@
 		 * @param {Object} comment ссылка на текущий комментарий
 		 */
 
-		function addAuthor(i, comments, profiles, comment) {
+		function addAuthor(i, comments, profiles, comment, data) {
 			for (var j = 0; j < profiles.length; j++) {
 				if (i-1 === comments.length - 1) {
 					return false;
 				} else {
 					if (comments[i].from_id === profiles[j].uid) {
+							var date = new Date(data.date * 1000);
+							var commentDate = date.getDate() + ' ' + months[date.getMonth() - 1] + ' ' + date.getFullYear() + ' в ' + date.getHours() + ':' + date.getMinutes();
+
 	    				comment.querySelector('.comment__logo-image').src = profiles[j].photo_medium_rec;
 	    				comment.querySelector('.comment__group-title').textContent = profiles[j].first_name + ' ' + profiles[j].last_name;
-	    				
+							comment.querySelector('.comment__like-number').textContent = data.likes.count;
+							comment.querySelector('.comment__comment-date').textContent = commentDate;
+
 	    				if (profiles[j].online === 1) {
 	    					comment.querySelector('.comment__online').textContent = 'online';
 	    					comment.querySelector('.comment__online').style = 'font-weight: bold';
@@ -113,7 +142,7 @@
 	    					comment.querySelector('.comment__logo').href = 'http://vk.com/' + profiles[j].screen_name;
 	    				}
 	    			}
-				}
+					}
     		}
 		}
 
@@ -129,10 +158,10 @@
 			var comment = elementToClone.cloneNode(true);
 			var getText = data.text;
 			var getLink;
-			
+
 			comment.querySelector('.comment__text-title').textContent = validationComment(comment, data, getText, getLink)[0];
 
-			addAuthor(i, comments, profiles, comment);
+			addAuthor(i, comments, profiles, comment, data);
 
 			return comment;
 		}
@@ -144,15 +173,15 @@
 		    success : function(msg){
 		    	var comments = $(msg.response.comments);
 		    	var profiles = $(msg.response.profiles);
-		    	
+
 		    	for (var i = idStartComment; i < comments.length; i++) {
 					commentsContainer.append(showCommentElement(comments[i], comments, profiles, i));
 				}
-		    }
+			}
 		});
 	}
 
-	apiLink = 'https://api.vk.com/method/board.getComments?group_id=' + group_id + '&topic_id=' + topic_id + '&count=' + count + '&extended=' + extended;
+	apiLink = 'https://api.vk.com/method/board.getComments?group_id=' + group_id + '&topic_id=' + topic_id + '&count=' + count + '&extended=' + extended + '&need_likes=' + need_likes + '&sort=' + sort;
 
 	console.log(apiLink);
 	showDiscussion(apiLink, template, container, startComment);
