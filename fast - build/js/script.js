@@ -18,8 +18,8 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = '62330024'; // id группы
-	var topic_id = '32715594'; // id обсуждения
+	var group_id = ''; // id группы
+	var topic_id = ''; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
 	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
