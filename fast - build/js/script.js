@@ -18,8 +18,8 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = '62330024'; // id группы
-	var topic_id = '32715594'; // id обсуждения
+	var group_id = ''; // id группы
+	var topic_id = ''; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
 	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
@@ -43,8 +43,9 @@
 		 'июля',
 		 'августа',
 		 'сентября',
+		 'окт',
 		 'ноября',
-		 'дек',
+		 'дек'
 	];
 
 	if (sort === 0 || sort === '0') {
@@ -120,7 +121,7 @@
 				} else {
 					if (comments[i].from_id === profiles[j].uid) {
 							var date = new Date(data.date * 1000);
-							var commentDate = date.getDate() + ' ' + months[date.getMonth() - 1] + ' ' + date.getFullYear() + ' в ' + date.getHours() + ':' + date.getMinutes();
+							var commentDate = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ' в ' + date.getHours() + ':' + date.getMinutes();
 
 	    				comment.querySelector('.comment__logo-image').src = profiles[j].photo_medium_rec;
 	    				comment.querySelector('.comment__group-title').textContent = profiles[j].first_name + ' ' + profiles[j].last_name;
