@@ -18,13 +18,14 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = ''; // id группы
-	var topic_id = ''; // id обсуждения
+	var group_id = '62330024'; // id группы
+	var topic_id = '32715594'; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
 	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
 	var sort = 0; // фильтруем вывод комментариев (0 - с начала, 1 - с конца)
 	var startComment = 1; // С какого комментария выводим
+	var application = 1; // Добавляем стикеры/фото в список отзывов (0 - не добавлять, 1 - добавлять)
 
 	var linkToGroup = 'https://vk.com/'; // ссылка на вас или вашу группу
 	var adminName = 'Администратор'; // Ваше имя иои название вашей группы
@@ -81,17 +82,19 @@
 				if (typeof data[key] === 'object') {
 					getLink = '';
 
-					if (data.attachments !== undefined) {
-						switch(data.attachments[0].type) {
-							case 'photo':
-								comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
-								break;
-							case 'video':
-								comment.querySelector('.comment__image').src = data.attachments[0].video.image_big;
-								break;
-							case 'sticker':
-								comment.querySelector('.comment__image').src = data.attachments[0].sticker.photo_128;
+					if (application === '1' || application === 1) {
+						if (data.attachments !== undefined) {
+							switch(data.attachments[0].type) {
+								case 'photo':
+									comment.querySelector('.comment__image').src = data.attachments[0].photo.src_big;
 									break;
+								case 'video':
+									comment.querySelector('.comment__image').src = data.attachments[0].video.image_big;
+									break;
+								case 'sticker':
+									comment.querySelector('.comment__image').src = data.attachments[0].sticker.photo_128;
+										break;
+							}
 						}
 					}
 				}
