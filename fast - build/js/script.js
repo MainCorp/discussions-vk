@@ -18,11 +18,11 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = '50658538'; // id группы
-	var topic_id = '33164486'; // id обсуждения
+	var group_id = ''; // id группы
+	var topic_id = ''; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
-	var need_likes = 0; // загружаем лайки (0 - не загружать, 1 - загрузить)
+	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
 	var sort = 0; // фильтруем вывод комментариев (0 - с начала, 1 - с конца)
 	var startComment = 1; // С какого комментария выводим
 	var application = 1; // Добавляем стикеры/фото в список отзывов (0 - не добавлять, 1 - добавлять)
@@ -47,6 +47,8 @@
 		 'ноября',
 		 'дек'
 	];
+
+	var fragment = document.createDocumentFragment();
 
 	if (sort === 0 || sort === '0') {
 		sort = 'asc';
@@ -73,11 +75,29 @@
 
 		function validationComment(comment, data, getText, getLink) {
 			var collectionTextItem = [];
+
 			if (getText.length > 0) {
-				getText = data.text.split('<br>');
+				if (data.text.split(':bp-62330024_')[1] !== undefined) {
+					var linktoToAnswerUser = data.text.split(':bp-62330024')[0].split('[')[1];
+					var toAnswerUser = data.text.split(':bp-62330024_')[1].split('|')[1].split(']')[0];
+					var text = getText.split('],');
+					var userMessage = [];
+
+					var userLink = '<a class="comment__text-link" href="https://vk.com/' + linktoToAnswerUser + '">' + toAnswerUser + '</a>';
+
+					for (var i = 1; i < text.length; i++) {
+						userMessage.push(text[i]);
+					}
+
+					getText = userLink + ',' + userMessage;
+				} else {
+					getText = data.text.split('<br>');
+				}
 			} else {
 				getText = '';
 			}
+
+			// [club62330024:bp-62330024_636|Северный Флот]
 
 			for (key in data) {
 				if (typeof data[key] === 'object') {
@@ -166,7 +186,7 @@
 			var getText = data.text;
 			var getLink;
 
-			comment.querySelector('.comment__text-title').textContent = validationComment(comment, data, getText, getLink)[0];
+			comment.querySelector('.comment__text-title').innerHTML = validationComment(comment, data, getText, getLink)[0];
 
 			addAuthor(i, comments, profiles, comment, data);
 
@@ -174,17 +194,19 @@
 		}
 
 		$.ajax({
-		    url : req,
+				url : req,
 		    type : "GET",
 		    dataType : "jsonp",
-		    success : function(msg){
-		    	var comments = $(msg.response.comments);
-		    	var profiles = $(msg.response.profiles);
+		    success : function(msg) {
+						var comments = $(msg.response.comments);
+		    		var profiles = $(msg.response.profiles);
 
-		    	for (var i = idStartComment; i < comments.length; i++) {
-					commentsContainer.append(showCommentElement(comments[i], comments, profiles, i));
+			    	for (var i = idStartComment; i < comments.length; i++) {
+								fragment.append(showCommentElement(comments[i], comments, profiles, i));
+						}
+
+						commentsContainer.append(fragment);
 				}
-			}
 		});
 	}
 
