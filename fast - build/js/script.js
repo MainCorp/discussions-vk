@@ -77,9 +77,9 @@
 			var collectionTextItem = [];
 
 			if (getText.length > 0) {
-				if (data.text.split(':bp-62330024_')[1] !== undefined) {
-					var linktoToAnswerUser = data.text.split(':bp-62330024')[0].split('[')[1];
-					var toAnswerUser = data.text.split(':bp-62330024_')[1].split('|')[1].split(']')[0];
+				if (data.text.split(':bp-' + group_id + '_')[1] !== undefined) {
+					var linktoToAnswerUser = data.text.split(':bp-' + group_id)[0].split('[')[1];
+					var toAnswerUser = data.text.split(':bp-' + group_id + '_')[1].split('|')[1].split(']')[0];
 					var text = getText.split('],');
 					var userMessage = [];
 
