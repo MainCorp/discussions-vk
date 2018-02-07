@@ -18,8 +18,8 @@
 	var template = document.querySelector('#comment-template');
 	var container = $('.discussions-vk');
 
-	var group_id = ''; // id группы
-	var topic_id = ''; // id обсуждения
+	var group_id = '131286284'; // id группы
+	var topic_id = '34501014'; // id обсуждения
 	var count = 100;
 	var extended = 1; // будут ли загружены профили в отзывы (0 - нет, 1 - да)
 	var need_likes = 1; // загружаем лайки (0 - не загружать, 1 - загрузить)
@@ -27,7 +27,7 @@
 	var startComment = 1; // С какого комментария выводим
 	var application = 1; // Добавляем стикеры/фото в список отзывов (0 - не добавлять, 1 - добавлять)
 
-	var linkToGroup = 'https://vk.com/'; // ссылка на вас или вашу группу
+	var linkToGroup = 'https://vk.com/club131286284'; // ссылка на вас или вашу группу
 	var adminName = 'Администратор'; // Ваше имя иои название вашей группы
 	var adminIcon = 'https://vk.com/images/camera_100.png'; // URL иконки вашего vk или группы, размер 100x100
 
