@@ -16,44 +16,43 @@
 		<title>Проверка скрипта</title>
     	<link rel="stylesheet" href="css/normalize.css">
     	<link rel="stylesheet" href="css/style.css">
-    	<script src="js/jquery-3.2.1.min.js"></script>
 	</head>
   	<body>
 
-  		<div class="discussions-vk"></div>
+			<div class="discussions-vk"></div>
 
-		<template id="comment-template">
-			<div class="comment">
-				<div class="comment__column-1">
-					<a class="comment__logo" href>
-						<img class="comment__logo-image" src="https://vk.com/images/camera_100.png" alt="logo-group">
-					</a>
+			<template id="comment-template" style="display: none">
+				<div class="comment">
+					<div class="comment__column-1">
+						<a class="comment__logo" href>
+							<img class="comment__logo-image" src="https://vk.com/images/camera_100.png" alt="logo-group">
+						</a>
 
-					<p class="comment__online">offline</p>
+						<p class="comment__online">offline</p>
+					</div>
+
+					<div class="comment__column-2">
+						<div class="comment__header">
+							<a class="comment__group-title" href>Гость</a>
+							<p class="comment__comment-date"></p>
+						</div>
+
+						<p class="comment__text-title"></p>
+
+						<a class="comment__original-link" href></a>
+
+						<div class="comment__image-box">
+							<img class="comment__image" src alt>
+						</div>
+
+						<div class="comment__like">
+							<img class="comment__like-icon" src="img/like.png" width="12" height="10" alt="Количество лайков:">
+							<p class="comment__like-number"></p>
+						</div>
+					</div>
 				</div>
+			</template>
 
-				<div class="comment__column-2">
-					<div class="comment__header">
-						<a class="comment__group-title" href>Гость</a>
-						<p class="comment__comment-date"></p>
-					</div>
-
-					<p class="comment__text-title"></p>
-
-					<a class="comment__original-link" href></a>
-
-					<div class="comment__image-box">
-						<img class="comment__image" src alt>
-					</div>
-
-					<div class="comment__like">
-						<img class="comment__like-icon" src="img/like.png" width="12" height="10" alt="Количество лайков:">
-						<p class="comment__like-number"></p>
-					</div>
-				</div>
-			</div>
-		</template>
-
-		<script src="js/script.js"></script>
+			<script src="js/dscript.js"></script>
   	</body>
 </html>
