@@ -61,7 +61,7 @@
 }
 
 .comment__logo-image:hover {
-	opacity: 1;
+    opacity: 1;
 }
 
 .comment__header {
@@ -72,8 +72,9 @@
     font-size: 13px;
     line-height: 16px;
     font-weight: 700;
-    color: #42648b;
+    color: #42648b !important;
     text-decoration: none;
+    text-align: left !important;
 }
 
 .comment__group-title:hover,
@@ -100,19 +101,22 @@
     cursor: pointer;
     font-size: 13px;
     line-height: 16px;
-    color: #939393;
+    color: #939393 !important;
     margin: 0 0 0 5px;
     text-decoration: none;
+    text-align: left !important;
 }
 
 .comment__comment-date:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .comment__text-title,
 .comment__original-link {
     font-size: 13px;
     line-height: 19px;
+    color: #000 !important;
+    text-align: left !important;
 }
 
 .comment__text-title {
@@ -144,7 +148,8 @@
 }
 
 .comment__image-box {
-	margin-bottom: 30px;
+    display: flex;
+    margin-bottom: 30px;
 }
 
 @media screen and (max-width: 830px) {

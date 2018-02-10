@@ -2,6 +2,7 @@
   // user setting, такие же настройки в d_reviews.php
   var group_id = ''; // вписать id вашей группы
   var topic_id = ''; // вписать id поста
+  var JSONReviewsGeneratorReference = ''; // вписать путь к файлу d_reviews.php (например https://my-site.ru/d_reviews.php)
 
   // script
   var commentTemplate = document.querySelector('#comment-template').content;
@@ -118,7 +119,7 @@
     addComments(data);
   }
 
-  xhr.open('GET', 'https://hookah-fast.ru/test/build/d_reviews.php', true);
+  xhr.open('GET', JSONReviewsGeneratorReference, true);
 
   xhr.onload = function() {
     var data = JSON.parse(this.response).response;
