@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 10px 0;
+    padding: 10px 15px;
 
     background: #edeef0;
 }
@@ -16,6 +16,7 @@
     width: 100%;
     padding: 10px 25px;
     border-radius: 2px;
+
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
     margin: 10px 0;
     background: #fff;
@@ -50,8 +51,17 @@
 .comment__logo-image {
     display: block;
     max-width: 100%;
+
     height: auto;
     border-radius: 50%;
+
+    opacity: .9;
+
+    transition: opacity .3s;
+}
+
+.comment__logo-image:hover {
+	opacity: 1;
 }
 
 .comment__header {
@@ -87,12 +97,16 @@
 }
 
 .comment__comment-date {
-    cursor: default;
+    cursor: pointer;
     font-size: 13px;
     line-height: 16px;
     color: #939393;
     margin: 0 0 0 5px;
     text-decoration: none;
+}
+
+.comment__comment-date:hover {
+	text-decoration: underline;
 }
 
 .comment__text-title,
@@ -129,6 +143,9 @@
     line-height: 10px;
 }
 
+.comment__image-box {
+	margin-bottom: 30px;
+}
 
 @media screen and (max-width: 830px) {
     .comment__header {
