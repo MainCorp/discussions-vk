@@ -107,15 +107,20 @@
   }
 
   function addComments(data) {
-    for (var i = 0; i < data.count; i++) {
-      fragment.appendChild(createCommentElement(data, i));
+    if (data.count > quantityComments - 1) {
+      for (var i = 0; i < quantityComments; i++) {
+        fragment.appendChild(createCommentElement(data, i));
+      }
+    } else {
+      for (var i = 0; i < data.count; i++) {
+        fragment.appendChild(createCommentElement(data, i));
+      }
     }
 
     discussionsContainer.appendChild(fragment);
   }
 
   function showDiscussion(data) {
-    console.log(data);
     addComments(data);
   }
 
