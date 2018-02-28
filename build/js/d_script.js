@@ -6,8 +6,15 @@
   var quantityComments = 3; // количество комментариев для вывода
 
   // script
-  var commentTemplate = document.querySelector('#comment-template').content;
 	var discussionsContainer = document.querySelector('.discussions-vk');
+  var commentTemplate;
+
+  // for IE
+  if ('content' in document.querySelector('#comment-template')) {
+    commentTemplate = document.querySelector('#comment-template').content;
+  } else {
+    commentTemplate = document.querySelector('.comment');
+  }
 
   var MONTHS = [
 		 'янв',
@@ -58,6 +65,25 @@
     return date;
   }
 
+  function getCommentText(data, i) {
+    var text = data.items[i].text;
+    var dataReplyToUser = text.split(',')[0];
+    var dataReplyToUser_user = dataReplyToUser.split('[')[1];
+    var idPost;
+    var userName;
+    var postWithoutReply;
+
+    if (dataReplyToUser_user !== undefined) {
+      postWithoutReply = text.split('],')[1].trim();
+      idPost = dataReplyToUser.split('[')[1].split(']')[0].split('_')[1].split('|')[0];
+      userName = dataReplyToUser.split('[')[1].split(']')[0].split('_')[1].split('|')[1];
+
+      text = userName + ', ' + postWithoutReply;
+    }
+
+    return text;
+  }
+
   function createCommentElement(data, i) {
     var element = commentTemplate.cloneNode(true);
     var sourceIDLink = VK_LINK + data.groups[0].screen_name;
@@ -70,7 +96,7 @@
 
     var commentDate = validationDate(date);
 
-    element.querySelector('.comment__text-title').textContent = data.items[i].text;
+    element.querySelector('.comment__text-title').textContent = getCommentText(data, i);
     element.querySelector('.comment__like-number').textContent = data.items[i].likes.count;
     element.querySelector('.comment__comment-date').href = VK_LINK + 'topic-' + group_id + '_' + topic_id + '?post=' + data.items[i].id;
 
