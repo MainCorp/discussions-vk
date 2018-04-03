@@ -53,11 +53,11 @@
     var hours = String(date.getHours());
 
     if (minutes.length < 2) {
-      minutes += '0';
+      minutes = '0' + minutes;
     }
 
     if (hours.length < 2) {
-      hours += '0';
+      hours = '0' + hours;
     }
 
     date = date.getDate() + ' ' + MONTHS[date.getMonth()] + ' ' + date.getFullYear() + ' в ' + hours + ':' + minutes;
@@ -86,10 +86,10 @@
 
   function createCommentElement(data, i) {
     var element = commentTemplate.cloneNode(true);
-    var sourceIDLink = VK_LINK + data.groups[0].screen_name;
-    var sourcePhoto = data.groups[0].photo_100;
+    var sourceIDLink = VK_LINK + data.items[0].screen_name;
+    var sourcePhoto = data.items[0].photo_100;
     var stateOnline = '';
-    var nameTitle = data.groups[0].name;
+    var nameTitle = data.items[0].name;
     var sourceSticker = '';
 
     var date = new Date(data.items[i].date * 1000);
